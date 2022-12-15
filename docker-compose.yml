@@ -1,0 +1,43 @@
+version: "2"
+services:
+  mysql_s:
+    image: mysql
+    container_name: mysql_c
+    restart: on-failure
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=Admin@123
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=Admin@1234
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "0.0.0.0:3306:3306"
+  phpmyadmin:
+    container_name: phpmyadmin_c
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: on-failure
+    environment:
+      PMA_HOST: mysql_s
+      UPLOAD_LIMIT: 300M
+    ports:
+      - "0.0.0.0:8084:80"
+  redis:
+    container_name: redis_c
+    ports:
+      - '6379:6379'
+    volumes:
+      - "/data/dvolumes/exchange/docker-redis:/data"
+    image: redis
+  users_service:
+    ports:
+      - "0.0.0.0:3005:3005"
+    container_name: users_service
+    restart: always
+    build: ./user_service
+    env_file: ./user_service/app/config/.env
+    environment:
+      - NODE_ENV=development
+volumes:
+  mysql-data:
+  docker-redis:
