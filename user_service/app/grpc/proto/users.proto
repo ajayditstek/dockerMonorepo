@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+
+
+message getRequest{
+    string userId = 1;
+}
+
+message UserDataResponse {
+    string message = 1;
+    bool status = 2;
+    map<string,string> payload = 3;
+}
+
+service UserService {
+    rpc getUserById (getRequest) returns (UserDataResponse) {}
+}

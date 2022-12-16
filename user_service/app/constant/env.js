@@ -17,5 +17,12 @@ export default {
     DB_DIALECT : process.env.DB_DIALECT || _CONF.development.dialect,
     SWAGGER : process.env.SWAGGER || true,
 
+    GRPC: {
+        NAME: process.env.GRPC_NAME,
+        PORT: process.env.GRPC_PORT,
+        NOTIFICATION_CONTAINER: process.env.NOTIFICATION_CONTAINER,
+        NOTIFICATION_PORT: process.env.NOTIFICATION_PORT,
+    },
+
     NODE_ENV: process.env.NODE_ENV || 'development'
 }

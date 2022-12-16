@@ -5,7 +5,9 @@
   "main": "./app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createdb" : "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run start",
+    "run-project": "concurrently \"npm run grpc\" \"npm run start\"",
+    "grpc": "node -r esm-wallaby ./app/grpc",
+    "createdb": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run grpc && npm run start",
     "start": "nodemon -r esm-wallaby ./app"
   },
   "repository": {
@@ -19,7 +21,10 @@
   },
   "homepage": "https://github.com/ajayditstek/nodemysql#readme",
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.0",
+    "@grpc/proto-loader": "^0.7.4",
     "bcrypt": "^5.1.0",
+    "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "esm-wallaby": "^3.2.26",

@@ -29,13 +29,22 @@ services:
     volumes:
       - "/data/dvolumes/exchange/docker-redis:/data"
     image: redis
-  users_service:
+  users_s:
     ports:
       - "0.0.0.0:3005:3005"
-    container_name: users_service
+    container_name: users_c
     restart: always
     build: ./user_service
     env_file: ./user_service/app/config/.env
+    environment:
+      - NODE_ENV=development
+  notification_s:
+    ports:
+      - "0.0.0.0:3006:3006"
+    container_name: notification_c
+    restart: always
+    build: ./notification_service
+    env_file: ./notification_service/app/config/.env
     environment:
       - NODE_ENV=development
 volumes:

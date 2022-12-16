@@ -1,5 +1,5 @@
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from '../swagger/swagger.json';
+import swaggerDocument from './swagger.json';
 var options = {
   //customCss: '.swagger-ui .topbar { display: none }'
 };

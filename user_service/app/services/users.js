@@ -100,6 +100,16 @@ class Users {
             //Helper.ResponseHelper.error(res,{ message : constant.message.UPDATED_ERROR});
         }
     }
+
+    async getUserById(request) {
+        let user = await UsersModel.findOne({
+            where : { 
+                id : request.userId 
+            },
+            raw : true
+        });
+        return { message : 'User Detail', status : false, payload : user};
+    }
 }
 
 export default new Users();
