@@ -51,21 +51,23 @@ class Users {
             });
 
             if ( registerUser ) {
+                console.log('you are inside');
                 let token = await Middlewares.Auth.generateJWT({id:registerUser.id,email:registerUser.email});
-                Helper.RedisHelper.setString({
-                    key : 'jwt_token_'+registerUser.id,
-                    value : token
-                });
+                // Helper.RedisHelper.setString({
+                //     key : 'jwt_token_'+registerUser.id,
+                //     value : token
+                // });
                 let obj = {
                     "message": Constant.message.REGISTER_SUCCESS,
                     "payload": { token : token }
                 }
+                console.log('you are inside',obj);
                 return Helper.ResponseHelper.success(res, obj);
             }
 
-            Helper.ResponseHelper.error(res, {message:Constant.message.REGISTER_ERROR});
+            //Helper.ResponseHelper.error(res, {message:Constant.message.REGISTER_ERROR});
         }  catch(err) {
-            Helper.ResponseHelper.error(res, {message:Constant.message.REGISTER_ERROR});
+            Helper.ResponseHelper.error(res, {message:err});
         }
     }
 

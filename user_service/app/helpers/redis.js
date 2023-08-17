@@ -8,8 +8,8 @@ class RedisHelper {
     //#redisObj = redis;
 
     constructor() {
-        this.client = createClient(this.port, this.host);
-        // this.client = createClient({url : "redis://redis_c"});
+        // this.client = createClient(this.port, this.host);
+        this.client = createClient({url : "redis://redis_c"});
         
         this.client.on('connect', (res) => { 
             console.log('Redis Connected');

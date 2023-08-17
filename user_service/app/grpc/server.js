@@ -7,6 +7,8 @@ import constant from '../constant';
 
 const PROTO_PATH = path.join(__dirname, './proto/users.proto');
 
+console.log('server PROTO_PATH',PROTO_PATH);
+
 const options = {
   keepCase: true,
   longs: String,

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-project": "concurrently \"npm run grpc\" \"npm run start\"",
-    "grpc": "node -r esm-wallaby ./app/grpc",
-    "createdb": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run grpc && npm run start",
+    "grpc": "node -r esm-wallaby ./app/grpc && npm run start",
+    "createdb": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run run-project ",
     "start": "nodemon -r esm-wallaby ./app"
   },
   "repository": {
@@ -38,7 +38,8 @@
     "redis": "^4.5.1",
     "sequelize": "^6.26.0",
     "swagger-jsdoc": "^6.2.5",
-    "swagger-ui-express": "^4.6.0"
+    "swagger-ui-express": "^4.6.0",
+    "tedious": "^15.1.2"
   },
   "devDependencies": {
     "sequelize-cli": "^6.5.2"

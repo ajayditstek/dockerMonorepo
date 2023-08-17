@@ -12,7 +12,7 @@ class ValidationHelper {
                 break;
             case 'post':
                 obj = {
-                    '/api/register': registerSchema,
+                    '/register': registerSchema,
                     '/api/login': loginSchema,
                     // '/api/update/:id?' : updateProfileSchema
                 }
@@ -49,7 +49,7 @@ const registerSchema = {
   "type": "object",
   "properties": {
     "fullName": {"type": "string"},
-    "DOB" : {"type": "string","format":"date"},
+    "DOB" : {"type": "string"},
     "email": {"type": "string",'format': 'email'},
     "password": {"type": "string"}
   },

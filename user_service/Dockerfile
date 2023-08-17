@@ -11,5 +11,5 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-
+#EXPOSE 30051
 CMD [ "npm", "run", "createdb" ]

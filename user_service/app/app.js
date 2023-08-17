@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import constant from './constant';
 import routes from './routes';
+import apiroutes from './routes/api';
 const app = express();
 class Application {
   constructor() {
@@ -16,7 +17,11 @@ class Application {
     app.listen( app.get('port'),() => {
       console.log(`Server is running on port ${app.get('port')}.`);
     });
-    routes(app);
+    app.use('/user', apiroutes);
+    console.log('inside route--------');
+    // app.all('*', async (req,res)=> {
+    //   return res.status(200).send({ success : 'success1'})
+    // });
   }
 }
 
