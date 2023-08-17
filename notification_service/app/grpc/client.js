@@ -4,7 +4,10 @@ import * as protoLoader from '@grpc/proto-loader';
 import * as path from 'path';
 import constant from '../constant';
 
-const PROTO_PATH = path.join(__dirname, './proto/users.proto');
+const PROTO_PATH = path.join(__dirname, '/proto/users.proto');
+
+console.log('client PROTO_PATH',PROTO_PATH);
+
 
 const options = {
   keepCase: true,
@@ -22,6 +25,10 @@ let port = constant.env.GRPC.USER_PORT;
 const UserClient = new UserProto(
   `${host}:${port}`,
   grpc.credentials.createInsecure(),
+);
+
+console.log(
+  `ADMINClient running at ${host}:${port}`
 );
 
 export { UserClient };

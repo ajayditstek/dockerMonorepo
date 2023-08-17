@@ -1,16 +1,27 @@
 import Middleware from '../middlewares';
 import Helper from '../helpers';
 import Service from '../services';
+import express from 'express';
+// const {  userClient } = require('../grpc/client');
+import { UserClient } from '../grpc/client';
 
-const apiRoute = async (app) => {
-  app.post('/api/register', Middleware.Validation.validate, Service.Users.register);
-  app.post('/api/login', Middleware.Validation.validate, Service.Users.login);
-  app.put('/api/update/:id?', Middleware.Auth.jwtVerify, Middleware.Validation.validate, Service.Users.updateProfile);
-
-  // app.all('/api/*', Middleware.Auth.jwtVerify, Middleware.Validation.validate, async (req,res)=> {
-  //   Helper.ResponseHelper.error(res);
-  // });
-};
-
-
-export default apiRoute;
+export default express
+  .Router()
+  .get('/status', (_req, res) => {
+    res.send({
+      status: 'Notificaiton service working fine',
+    });
+  })
+  .get('/user', (_req, res) => {
+    UserClient.getUserById({userId:'01b5d9-a4bf-4a54-8960-06' }, (err, response) => {
+      console.log(err);
+      if (err) {
+        return res.send({
+          status: err,
+        });
+      }
+      return res.send({
+        payload: response,
+      });
+    })
+  })

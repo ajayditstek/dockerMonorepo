@@ -1,0 +1,58 @@
+http:
+  port: 8080
+  # host: 10.1.1.12
+  # host: localhost
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  api:
+    # host: 'localhost'
+    paths: "/api/"
+  user:
+    paths: "/user/*"
+  notification:
+    paths: "/notification/*"
+serviceEndpoints:
+  httpbin:
+    url: "https://httpbin.org"
+  userEndpoint:
+    url: "http://users_s:3005"
+  notificationEndpoint:
+    url: "http://notification_s:3006"
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - api
+    policies:
+      # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+      # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin
+              changeOrigin: true
+  user:
+    apiEndpoints:
+      - user
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: userEndpoint
+              changeOrigin: true
+  notification:
+    apiEndpoints:
+      - notification
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: notificationEndpoint
+              changeOrigin: true

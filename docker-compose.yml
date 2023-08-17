@@ -32,6 +32,7 @@ services:
   users_s:
     ports:
       - "0.0.0.0:3005:3005"
+      - "0.0.0.0:30051:30051"
     container_name: users_c
     restart: always
     build: ./user_service
@@ -41,12 +42,20 @@ services:
   notification_s:
     ports:
       - "0.0.0.0:3006:3006"
+      - "0.0.0.0:30061:30061"
     container_name: notification_c
     restart: always
     build: ./notification_service
     env_file: ./notification_service/app/config/.env
     environment:
       - NODE_ENV=development
+  gateway_s:
+    hostname: api-gateway
+    ports:
+      - "0.0.0.0:8080:8080"
+    container_name: gateway_c
+    restart: always
+    build: ./gateway_service/
 volumes:
   mysql-data:
   docker-redis:

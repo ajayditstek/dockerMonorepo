@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-project": "concurrently \"npm run grpc\" \"npm run start\"",
-    "grpc": "node -r esm-wallaby ./app/grpc",
-    "createdb": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run grpc && npm run start",
+    "grpc": "node -r esm-wallaby ./app/grpc && npm run start",
+    "createdb": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npm run run-project ",
     "start": "nodemon -r esm-wallaby ./app"
   },
   "repository": {
